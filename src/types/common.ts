@@ -1,9 +1,17 @@
-interface carDetails {
-    id: number;
-    name: string;
-    brand: string;
-    year: number;
-    price: number;
+interface CarDetails {
+    id: number,
+    name: string,
+    imageUrl: string,
+    popularity: number,
+    city: string,
+    rating_score: number
 }
 
-export type { carDetails };
+interface CarCardProps {
+    imgUrl: string;
+    title: string;
+    city: string;
+    rating: number;
+}
+
+export type { CarDetails, CarCardProps };

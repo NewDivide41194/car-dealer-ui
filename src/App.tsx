@@ -1,13 +1,16 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
-import LoadingSpinner from './components/loading';
+import './styles/index.css';
+import { Route, BrowserRouter as Router, Routes } from 'react-router-dom';
+import HomePage from './pages/home';
+import NavBar from './components/navBar';
 
 function App() {
   return (
-    <div>
-      <LoadingSpinner/>
-    </div>
+    <Router>
+      <NavBar/>
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+      </Routes>
+    </Router>
   );
 }
 

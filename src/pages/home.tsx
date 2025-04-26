@@ -1,16 +1,11 @@
-import { useEffect } from "react";
-import { fetchDealers } from "../services/dealer";
+import CarDealerList from "../components/listComponent/carDealerList";
 
 const HomePage = () => {
-    useEffect(() => {
-        fetchDealers(1)
-    }, []);
-
     return (
-        <div>
-            <h1>Welcome to the Home Page</h1>
-            <p>This is the main content of the home page.</p>
-        </div>
+        <>
+            <p className="text-3xl p-4">Welcome to the Car Dealer</p>
+            <CarDealerList />
+        </>
     );
 }
 
