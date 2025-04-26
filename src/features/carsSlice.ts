@@ -9,9 +9,8 @@ export const fetchCars = createAsyncThunk<CarDetails[], { page: number; query?: 
   async ({ page, query }) => {
     const searchParam = query ? `&name=${encodeURIComponent(query)}` : '';
     const res = await fetch(`${baseUrl}/car?page=${page}&limit=10${searchParam}`);
-    console.log("res", res);
+    console.log("response =>", res);
     let data: CarDetails[] = [];
-
     if (res.ok) {
       data = await res.json();
       return data as CarDetails[];

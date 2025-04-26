@@ -16,9 +16,9 @@ const CarCard = (props: CarCardProps) => {
             />
 
             <div className="p-5">
-                <Link to="#">
                     <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">{title}</h5>
-                </Link>
+                    <div className="border-t dark:border-gray-700 border-gray-200 my-2"></div>
+
                 <div className="flex items-center justify-between">
                     <p className="mb-3 font-normal text-gray-700 dark:text-gray-400">{city}</p>
                     <p className="mb-3 font-normal text-gray-700 dark:text-gray-400">⭐ {rating}</p>

@@ -6,6 +6,10 @@ interface CarDetails {
     city: string,
     rating_score: number
 }
+interface CityDetails {
+    id: number,
+    name: string
+}
 
 interface CarCardProps {
     imgUrl: string;
@@ -14,4 +18,15 @@ interface CarCardProps {
     rating: number;
 }
 
-export type { CarDetails, CarCardProps };
+enum SortingOptions {
+    POPULARITY = 'popularity',
+    RATING = 'rating'
+}
+
+enum SortingOrder {
+    ASCENDING = 'asc',
+    DESCENDING = 'desc'
+}
+
+export type { CarDetails, CarCardProps, CityDetails, };
+export { SortingOptions, SortingOrder };

@@ -1,11 +1,13 @@
 import { configureStore } from '@reduxjs/toolkit';
 import carsReducer from '../features/carsSlice';
 import themeReducer from '../features/themeSlice';
+import filterReducer from '../features/filterSlice';
 
 export const store = configureStore({
   reducer: {
     cars: carsReducer,
-    theme: themeReducer
+    theme: themeReducer,
+    filter: filterReducer
   },
 });
 
