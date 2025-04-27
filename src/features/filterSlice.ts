@@ -6,8 +6,7 @@ const initialState = {
   list: [] as CityDetails[],
   loading: false,
   selectedCity: null as CityDetails | null,
-  sortBy: null as SortingOptions | null,
-  sortOrder: null as SortingOrder | null,
+  selectedRating: 0
 };
 const baseUrl = process.env.REACT_APP_BASE_URL;
 
@@ -15,7 +14,6 @@ export const fetchCities = createAsyncThunk<CityDetails[]>(
   'ui/fetchCities',
   async () => {
     const res = await fetch(`${baseUrl}/city`);
-    console.log("response =>", res);
     let data: CityDetails[] = [];
     if (res.ok) {
       data = await res.json();
@@ -38,19 +36,9 @@ const filterSlice = createSlice({
     setSelectedCity(state, action: PayloadAction<CityDetails | null>) {
       state.selectedCity = action.payload;
     },
-    setSorting(state, action: PayloadAction<{ sortBy: SortingOptions; sortOrder: SortingOrder }>) {
-      state.sortBy = action.payload.sortBy;
-      state.sortOrder = action.payload.sortOrder;
-  
-      state.list = [...state.list].sort((a, b) => {
-        const key = action.payload.sortBy;
-        const order = action.payload.sortOrder === 'asc' ? 1 : -1;
-  
-        if ((a as any)[key] < (b as any)[key]) return -1 * order;
-        if ((a as any)[key] > (b as any)[key]) return 1 * order;
-        return 0;
-      });
-    },
+    setRating(state, action: PayloadAction<number>) {
+      state.selectedRating = action.payload;
+    }
   },
   extraReducers: (builder) => {
     builder
@@ -67,5 +55,5 @@ const filterSlice = createSlice({
   },
 });
 
-export const { toggleDropdown, closeDropdown, setSelectedCity } = filterSlice.actions;
+export const { toggleDropdown, closeDropdown, setSelectedCity, setRating } = filterSlice.actions;
 export default filterSlice.reducer;

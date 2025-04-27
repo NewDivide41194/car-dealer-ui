@@ -1,6 +1,6 @@
 .car-image {
-    background-size: 100%;
     border-radius: 8px 8px 0px 0px;
     transition: background-size 0.3s ease-in-out;
     background-repeat: no-repeat;
+    background-size: 100%;
 }

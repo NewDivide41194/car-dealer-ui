@@ -1,21 +1,30 @@
 import { createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit';
-import { CarDetails } from '../types/common';
+import { CarDetails, SearchCategories } from '../types/common';
 
 const baseUrl = process.env.REACT_APP_BASE_URL;
 
 // Allow both page and query
-export const fetchCars = createAsyncThunk<CarDetails[], { page: number; query?: string }>(
+export const fetchCars = createAsyncThunk<CarDetails[], { page: number; filters?: Record<string, string> }>(
   'cars/fetchCars',
-  async ({ page, query }) => {
-    const searchParam = query ? `&name=${encodeURIComponent(query)}` : '';
-    const res = await fetch(`${baseUrl}/car?page=${page}&limit=10${searchParam}`);
-    console.log("response =>", res);
+  async ({ page, filters }) => {
+    const searchParams = new URLSearchParams();
+
+    if (filters) {
+      Object.entries(filters).forEach(([key, value]) => {
+        if (value) {
+          searchParams.append(key, value);
+        }
+      });
+    }
+
+    const res = await fetch(`${baseUrl}/car?page=${page}&limit=10&${searchParams.toString()}`);
+
     let data: CarDetails[] = [];
     if (res.ok) {
       data = await res.json();
       return data as CarDetails[];
     }
-    return data
+    return data;
   }
 );
 
@@ -24,7 +33,8 @@ const carsSlice = createSlice({
   initialState: {
     list: [] as CarDetails[],
     page: 1,
-    query: '',
+    filters: {} as Record<string, string>,
+    selectedCategory: SearchCategories.NAME,
     hasMore: true,
     loading: false,
   },
@@ -32,12 +42,15 @@ const carsSlice = createSlice({
     incrementPage: (state) => {
       state.page += 1;
     },
-    setQuery: (state, action: PayloadAction<string>) => {
-      state.query = action.payload;
+    setFilter: (state, action: PayloadAction<Record<string, string>>) => {
+      state.filters = action.payload;
       state.page = 1;
       state.list = []; // Clear old results on new search
       state.hasMore = true;
     },
+    setSelelectedCategory: (state, action: PayloadAction<SearchCategories>) => {
+      state.selectedCategory = action.payload;
+    }
   },
   extraReducers: (builder) => {
     builder
@@ -48,7 +61,11 @@ const carsSlice = createSlice({
         if (action.payload.length === 0) {
           state.hasMore = false;
         } else {
-          state.list.push(...action.payload);
+          // Check if the new data is empty
+          const existingCarIds = new Set(state.list.map(car => car.id)); // Check for existing car IDs
+          const newCars = action.payload.filter(car => !existingCarIds.has(car.id));
+          // Add only new cars to the list
+          state.list.push(...newCars);
         }
         state.loading = false;
       })
@@ -58,5 +75,5 @@ const carsSlice = createSlice({
   },
 });
 
-export const { incrementPage, setQuery } = carsSlice.actions;
+export const { incrementPage, setFilter, setSelelectedCategory } = carsSlice.actions;
 export default carsSlice.reducer;

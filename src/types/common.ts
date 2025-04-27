@@ -16,11 +16,12 @@ interface CarCardProps {
     title: string;
     city: string;
     rating: number;
+    porpularity: number;
 }
 
 enum SortingOptions {
     POPULARITY = 'popularity',
-    RATING = 'rating'
+    RATING = 'rating_score'
 }
 
 enum SortingOrder {
@@ -28,5 +29,11 @@ enum SortingOrder {
     DESCENDING = 'desc'
 }
 
+enum SearchCategories {
+    NAME = 'Name',
+    CITY = 'City',
+    RATING = 'Rating'
+}
+
 export type { CarDetails, CarCardProps, CityDetails, };
-export { SortingOptions, SortingOrder };
+export { SortingOptions, SortingOrder, SearchCategories };

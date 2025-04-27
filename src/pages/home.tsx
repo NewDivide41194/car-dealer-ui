@@ -1,7 +1,8 @@
+import { JSX } from "react";
 import FilterBar from "../components/filterBar";
 import CarDealerList from "../components/listComponent/carDealerList";
 
-const HomePage = () => {
+const HomePage = ():JSX.Element => {
     return (
         <>
             <FilterBar />
