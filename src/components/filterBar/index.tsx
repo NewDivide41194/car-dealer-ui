@@ -15,6 +15,6 @@ const FilterBar = (): JSX.Element => {
       </div>
     </div>
   );
-}
+};
 
 export default FilterBar;

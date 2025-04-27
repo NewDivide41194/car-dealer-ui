@@ -1,10 +1,9 @@
-// store/themeSlice.ts
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice } from "@reduxjs/toolkit";
 
-const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
 
 const themeSlice = createSlice({
-  name: 'theme',
+  name: "theme",
   initialState: {
     darkMode: prefersDark,
   },

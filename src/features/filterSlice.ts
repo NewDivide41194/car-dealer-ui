@@ -1,17 +1,17 @@
-import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { CityDetails, SortingOptions, SortingOrder } from '../types/common';
+import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { CityDetails } from "../types/common";
 
 const initialState = {
   isDropdownOpen: false,
   list: [] as CityDetails[],
   loading: false,
   selectedCity: null as CityDetails | null,
-  selectedRating: 0
+  selectedRating: 0,
 };
 const baseUrl = process.env.REACT_APP_BASE_URL;
 
 export const fetchCities = createAsyncThunk<CityDetails[]>(
-  'ui/fetchCities',
+  "ui/fetchCities",
   async () => {
     const res = await fetch(`${baseUrl}/city`);
     let data: CityDetails[] = [];
@@ -19,12 +19,12 @@ export const fetchCities = createAsyncThunk<CityDetails[]>(
       data = await res.json();
       return data as CityDetails[];
     }
-    return data
-  }
+    return data;
+  },
 );
 
 const filterSlice = createSlice({
-  name: 'ui',
+  name: "ui",
   initialState,
   reducers: {
     toggleDropdown(state) {
@@ -38,22 +38,26 @@ const filterSlice = createSlice({
     },
     setRating(state, action: PayloadAction<number>) {
       state.selectedRating = action.payload;
-    }
+    },
   },
   extraReducers: (builder) => {
     builder
       .addCase(fetchCities.pending, (state) => {
         state.loading = true;
       })
-      .addCase(fetchCities.fulfilled, (state, action: PayloadAction<CityDetails[]>) => {
-        state.list = action.payload;
-        state.loading = false;
-      })
+      .addCase(
+        fetchCities.fulfilled,
+        (state, action: PayloadAction<CityDetails[]>) => {
+          state.list = action.payload;
+          state.loading = false;
+        },
+      )
       .addCase(fetchCities.rejected, (state) => {
         state.loading = false;
       });
   },
 });
 
-export const { toggleDropdown, closeDropdown, setSelectedCity, setRating } = filterSlice.actions;
+export const { toggleDropdown, closeDropdown, setSelectedCity, setRating } =
+  filterSlice.actions;
 export default filterSlice.reducer;

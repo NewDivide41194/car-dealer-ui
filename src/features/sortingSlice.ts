@@ -1,5 +1,5 @@
-import {  createSlice, PayloadAction } from '@reduxjs/toolkit';
-import {  SortingOptions, SortingOrder } from '../types/common';
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { SortingOptions, SortingOrder } from "../types/common";
 
 const initialState = {
   isDropdownOpen: false,
@@ -8,7 +8,7 @@ const initialState = {
 };
 
 const sortingSlice = createSlice({
-  name: 'ui',
+  name: "ui",
   initialState,
   reducers: {
     toggleDropdownSort(state) {
@@ -18,18 +18,11 @@ const sortingSlice = createSlice({
       state.selectedSortOrder = action.payload;
     },
     setSortOrder(state, action: PayloadAction<{ sortOrder: SortingOrder }>) {
-        state.sortOrder = action.payload.sortOrder;
-    //   state.list = [...state.list].sort((a, b) => {
-    //     const key = action.payload.sortBy;
-    //     const order = action.payload.sortOrder === 'asc' ? 1 : -1;
-  
-    //     if ((a as any)[key] < (b as any)[key]) return -1 * order;
-    //     if ((a as any)[key] > (b as any)[key]) return 1 * order;
-    //     return 0;
-    //   });
+      state.sortOrder = action.payload.sortOrder;
     },
-  }
+  },
 });
 
-export const { toggleDropdownSort , setSortBy, setSortOrder} = sortingSlice.actions;
+export const { toggleDropdownSort, setSortBy, setSortOrder } =
+  sortingSlice.actions;
 export default sortingSlice.reducer;

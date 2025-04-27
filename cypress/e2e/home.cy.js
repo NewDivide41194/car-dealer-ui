@@ -11,9 +11,8 @@ describe('App', () => {
     cy.contains('Rating :').should('exist');
     cy.contains('Filtered result').should('exist')
 
-
-  
-    cy.get('[data-cy="switch-theme"]').click(); // Change theme
+    // Change theme
+    cy.get('[data-cy="switch-theme"]').click();
     cy.wait(2500)
 
     // Search by car name
@@ -38,12 +37,12 @@ describe('App', () => {
 
     // Set Rating
     cy.get('#rating-score')
-    .invoke('val', 1)
-    .trigger('input')
-    .trigger('change');  
+      .invoke('val', 1)
+      .trigger('input')
+      .trigger('change');
     cy.wait(2500)
 
-
+    cy.get('[data-cy="switch-theme"]').click();
   });
 
 });

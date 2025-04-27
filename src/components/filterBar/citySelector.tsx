@@ -1,26 +1,33 @@
-import { fetchCities, setSelectedCity, toggleDropdown } from '../../features/filterSlice'; // update the path if needed
-import { RootState } from '../../store';
-import { JSX, useEffect } from 'react';
-import { useAppDispatch, useAppSelector } from '../../hooks/useAppDispatch';
-import { fetchCars, setFilter } from '../../features/carsSlice';
+import {
+  fetchCities,
+  setSelectedCity,
+  toggleDropdown,
+} from "../../features/filterSlice";
+import { RootState } from "../../store";
+import { JSX, useEffect } from "react";
+import { useAppDispatch, useAppSelector } from "../../hooks/useAppDispatch";
+import { fetchCars, setFilter } from "../../features/carsSlice";
+import { CityDetails } from "../../types/common";
 
 const CitySelector = (): JSX.Element => {
-  const { list, loading, selectedCity, isDropdownOpen } = useAppSelector((state: RootState) => state.filter);
+  const { list, loading, selectedCity, isDropdownOpen } = useAppSelector(
+    (state: RootState) => state.filter,
+  );
   const { filters } = useAppSelector((state: RootState) => state.cars);
   const dispatch = useAppDispatch();
 
   useEffect(() => {
     if (isDropdownOpen) {
-      dispatch(fetchCities())
+      dispatch(fetchCities());
     }
   }, [isDropdownOpen, dispatch]);
 
-  const handleSelectCity = (item: any) => {
+  const handleSelectCity = (item: CityDetails) => {
     dispatch(setSelectedCity(item));
     dispatch(toggleDropdown());
     dispatch(setFilter({ ...filters, city: item.name }));
     dispatch(fetchCars({ page: 1, filters: { ...filters, city: item.name } }));
-  }
+  };
 
   return (
     <div className="relative inline-block text-left p-4">
@@ -55,11 +62,11 @@ const CitySelector = (): JSX.Element => {
             ) : (
               list.map((item, k) => (
                 <li
-                  key={item.id}
+                  key={k}
                   data-cy={"city-option"}
                   className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white cursor-pointer"
-                  onClick={() => handleSelectCity(item)}>
-
+                  onClick={() => handleSelectCity(item)}
+                >
                   {item.name}
                 </li>
               ))

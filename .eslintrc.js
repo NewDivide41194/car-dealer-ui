@@ -1,10 +1,11 @@
 module.exports = {
-    parser: '@typescript-eslint/parser', // Use the TypeScript parser if you're using TypeScript
+    parser: '@typescript-eslint/parser', // Use the TypeScript parser
     extends: [
       'eslint:recommended',
-      'plugin:react/recommended', // React-specific linting rules
-      'plugin:react-hooks/recommended', // React Hooks-specific linting rules
-      'plugin:@typescript-eslint/recommended', // TypeScript rules (if using TypeScript)
+      'plugin:react/recommended',
+      'plugin:@typescript-eslint/recommended', // TypeScript rules
+      'plugin:react-hooks/recommended', // React Hooks rules
+      'plugin:prettier/recommended', // Prettier integration
     ],
     parserOptions: {
       ecmaVersion: 2021, // Allows for the parsing of modern ECMAScript features
@@ -15,16 +16,15 @@ module.exports = {
     },
     env: {
       browser: true, // Assume browser environment
-      node: true, // Assume Node.js environment (optional)
+      node: true, // Assume Node.js environment
       es2021: true, // Enable ECMAScript 2021 features
     },
     rules: {
-      // Custom rules can go here
-      'react/prop-types': 'off', // Disable prop-types if you're using TypeScript
-      'react/react-in-jsx-scope': 'off', // Not needed if React 17 JSX Transform is used
-      '@typescript-eslint/no-unused-vars': ['error'], // Example custom TypeScript rule
-      'react/jsx-uses-react': 'off', // Not needed if React 17 JSX Transform is used
-      'react/jsx-uses-vars': 'error', // Warn if React variables are not used
+      // Custom rules
+      '@typescript-eslint/no-unused-vars': ['error'],
+      "@typescript-eslint/no-unused-expressions": "off",
+      'react/prop-types': 'off', // You can turn this off if you are using TypeScript
+      'react/react-in-jsx-scope': 'off', // React 17 JSX Transform doesn't need it
     },
     settings: {
       react: {
