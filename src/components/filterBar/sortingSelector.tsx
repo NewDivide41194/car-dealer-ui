@@ -58,11 +58,11 @@ const SortingSelector = (): JSX.Element => {
 
                 {isDropdownOpen && (
                     <div className="absolute z-10 mt-2 bg-white divide-y divide-gray-100 rounded-lg shadow-sm w-44 dark:bg-gray-700">
-                        <ul className="py-2 text-sm text-gray-700 dark:text-gray-200">
-
-                            {Object.keys(SortingOptions).map((item) => (
+                        <ul className="py-2 text-sm text-gray-700 dark:text-gray-200 shadow-lg">
+                            {Object.keys(SortingOptions).map((item,k) => (
                                 <li
                                     key={item}
+                                    data-cy={"sort-by-option"}
                                     className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white cursor-pointer"
                                     onClick={() => handleSelectSortBy(item as SortingOptions)}
                                 >
@@ -90,6 +90,7 @@ const SortingSelector = (): JSX.Element => {
                     className="w-4 h-4 text-gray-600 bg-gray-100 border-gray-300 dark:bg-gray-700 dark:border-gray-600" />
                 <label
                     htmlFor={v}
+                    data-cy={"order-option"}
                     className="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">{v.toUpperCase()}</label>
             </div>)}
 

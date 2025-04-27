@@ -16,7 +16,7 @@ const CarCard = (props: CarCardProps): JSX.Element => {
             />
 
             <div className="p-5">
-                <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">{title}</h5>
+                <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white" data-cy={"car-title"}>{title}</h5>
                 <div className="border-t dark:border-gray-700 border-gray-200 my-2"></div>
 
                 <div className="flex items-center justify-between">

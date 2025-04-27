@@ -15,8 +15,8 @@ const CarDealerList = () => {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    dispatch(fetchCars({ page, filters }));
-  }, [page, dispatch]);
+      dispatch(fetchCars({ page, filters }));
+  }, [page, dispatch, filters]);
 
   useEffect(() => {
     if (inView && !loading && hasMore) {

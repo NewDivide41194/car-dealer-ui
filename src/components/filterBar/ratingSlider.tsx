@@ -11,7 +11,7 @@ const RatingSlider = (): JSX.Element => {
     const onChangeRating = (e: React.ChangeEvent<HTMLInputElement>) => {
         const value = parseFloat(e.target.value);
         dispatch(setRating(value));
-        dispatch(setFilter({ ...filters, rating_score: value.toString() }));        
+        dispatch(setFilter({ ...filters, rating_score: value.toString() }));
         dispatch(fetchCars({ page: 1, filters: { ...filters, rating_score: value.toString() } }))
     }
 
@@ -31,7 +31,7 @@ const RatingSlider = (): JSX.Element => {
                 min={0}
                 step={0.1}
                 className="w-full h-1 bg-gray-200 rounded-lg appearance-none cursor-pointer dark:bg-gray-700" />
-            <label className="ms-4">
+            <label className="ms-4" data-cy="rating-value" >
                 {selectedRating || null}
             </label>
         </div>
