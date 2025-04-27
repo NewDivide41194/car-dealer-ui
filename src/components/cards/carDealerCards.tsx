@@ -1,4 +1,3 @@
-import { Link } from "react-router-dom"
 import { CarCardProps } from "../../types/common";
 import { JSX } from "react";
 
@@ -8,7 +7,7 @@ const CarCard = (props: CarCardProps): JSX.Element => {
         <div
             className="max-w-sm bg-white border border-gray-200 w-full rounded-lg shadow-sm dark:bg-gray-800 dark:border-gray-700 hover:shadow-lg transition-transform transform hover:scale-105">
             <div
-                className="car-image h-[155px] w-full bg-center overflow-hidden transform transition-transform duration-300"
+                className=" rounded-t-lg transition-[background-size] duration-300 ease-in-out bg-no-repeat bg-[length:100%] h-[155px] w-full bg-center overflow-hidden transform transition-transform duration-300"
                 style={{
                     backgroundImage: `url(${imgUrl})`,
                 }}
