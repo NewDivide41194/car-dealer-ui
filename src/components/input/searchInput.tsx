@@ -4,13 +4,16 @@ import {
   fetchCars,
   setFilter,
   setSelelectedCategory,
+  toggleCategoryDropdown,
 } from "../../features/carsSlice";
 import debounce from "lodash.debounce";
 import { RootState } from "../../store";
 import { SearchCategories } from "../../types/common";
 
 const SearchInput = () => {
-  const { selectedCategory } = useAppSelector((state: RootState) => state.cars);
+  const { selectedCategory, isDropdownOpen } = useAppSelector(
+    (state: RootState) => state.cars,
+  );
   const dispatch = useAppDispatch();
   // console.log(selectedCategory);
 
@@ -26,6 +29,13 @@ const SearchInput = () => {
     [dispatch],
   );
 
+  const placeholderText =
+    selectedCategory === SearchCategories.CITY
+      ? "Search by City"
+      : selectedCategory === SearchCategories.NAME
+        ? "Search by Name"
+        : "Search by Rating";
+
   const debouncedSearch = useMemo(
     () =>
       debounce((searchTerm: string) => {
@@ -39,17 +49,15 @@ const SearchInput = () => {
   return (
     <form className="max-w-lg min-w-[30%] my-2">
       <div className="flex">
-        <label
+        {/* <label
           htmlFor="search-dropdown"
           className="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white"
-        >
-          Your Email
-        </label>
+        ></label> */}
         <button
           data-cy={"category-selector"}
           id="dropdown-button"
-          data-dropdown-toggle="dropdown"
-          className="shrink-0 z-10 inline-flex items-center py-2.5 px-4 text-sm font-medium text-center text-gray-900 bg-gray-100 border border-gray-300 rounded-s-lg hover:bg-gray-200 dark:bg-gray-700 dark:hover:bg-gray-600 dark:text-white dark:border-gray-600"
+          onClick={() => dispatch(toggleCategoryDropdown())}
+          className="shrink-0 justify-between z-10 min-w-[100px] inline-flex items-center py-2.5 px-4 text-sm font-medium text-center text-gray-900 bg-gray-100 border border-gray-300 rounded-s-lg hover:bg-gray-200 dark:bg-gray-700 dark:hover:bg-gray-600 dark:text-white dark:border-gray-600"
           type="button"
         >
           {selectedCategory}
@@ -69,29 +77,32 @@ const SearchInput = () => {
             />
           </svg>
         </button>
-        <div
-          id="dropdown"
-          className="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow-sm w-44 dark:bg-gray-700"
-        >
-          <ul
-            className="py-2 text-sm text-gray-700 dark:text-gray-200"
-            aria-labelledby="dropdown-button"
+        {isDropdownOpen && (
+          <div
+            id="dropdown"
+            className="z-10 bg-white absolute top-[65px] divide-y divide-gray-100 rounded-lg shadow-sm w-44 dark:bg-gray-700"
           >
-            {Object.values(SearchCategories).map((v, k) => (
-              <li key={k}>
-                <button
-                  type="button"
-                  onClick={() => {
-                    dispatch(setSelelectedCategory(v));
-                  }}
-                  className="inline-flex w-full px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
-                >
-                  {v}
-                </button>
-              </li>
-            ))}
-          </ul>
-        </div>
+            <ul
+              className="py-2 text-sm text-gray-700 dark:text-gray-200"
+              aria-labelledby="dropdown-button"
+            >
+              {Object.values(SearchCategories).map((v, k) => (
+                <li key={k}>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      dispatch(setSelelectedCategory(v));
+                      dispatch(toggleCategoryDropdown());
+                    }}
+                    className="inline-flex w-full px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
+                  >
+                    {v}
+                  </button>
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
         <div className="relative w-full">
           <input
             type="search"
@@ -99,7 +110,7 @@ const SearchInput = () => {
             onChange={(e) => debouncedSearch(e.target.value)}
             id="search-dropdown"
             className="outline-none block p-2.5 w-full z-20 text-sm text-gray-900 bg-gray-50 rounded-e-lg border-s-gray-50 border-s-2 border border-gray-300 dark:bg-gray-700 dark:border-s-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:border-blue-500"
-            placeholder="Search by Name, City or Rating..."
+            placeholder={placeholderText}
             required
           />
         </div>

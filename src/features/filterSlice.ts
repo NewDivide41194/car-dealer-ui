@@ -30,9 +30,6 @@ const filterSlice = createSlice({
     toggleDropdown(state) {
       state.isDropdownOpen = !state.isDropdownOpen;
     },
-    closeDropdown(state) {
-      state.isDropdownOpen = false;
-    },
     setSelectedCity(state, action: PayloadAction<CityDetails | null>) {
       state.selectedCity = action.payload;
     },
@@ -58,6 +55,6 @@ const filterSlice = createSlice({
   },
 });
 
-export const { toggleDropdown, closeDropdown, setSelectedCity, setRating } =
+export const { toggleDropdown, setSelectedCity, setRating } =
   filterSlice.actions;
 export default filterSlice.reducer;

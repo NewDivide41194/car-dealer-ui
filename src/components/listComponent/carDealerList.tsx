@@ -59,7 +59,7 @@ const CarDealerList = () => {
           <div className="p-4 grid grid-cols-1 md:grid-cols-2 sm:grid-cols-2 lg:grid-cols-3  xl:grid-cols-4 gap-2">
             {list.map((car: CarDetails, k: number) => (
               <div key={k} className="p-4 flex flex-col items-center">
-                <Suspense fallback={<div>Loading Cards...</div>}>
+                <Suspense fallback={<CarDealerListSkeleton />}>
                   <CarCard
                     key={car.id}
                     imgUrl={car.imageUrl}

@@ -39,8 +39,12 @@ const carsSlice = createSlice({
     selectedCategory: SearchCategories.NAME,
     hasMore: true,
     loading: false,
+    isDropdownOpen: false,
   },
   reducers: {
+    toggleCategoryDropdown(state) {
+      state.isDropdownOpen = !state.isDropdownOpen;
+    },
     incrementPage: (state) => {
       state.page += 1;
     },
@@ -82,6 +86,10 @@ const carsSlice = createSlice({
   },
 });
 
-export const { incrementPage, setFilter, setSelelectedCategory } =
-  carsSlice.actions;
+export const {
+  incrementPage,
+  setFilter,
+  setSelelectedCategory,
+  toggleCategoryDropdown,
+} = carsSlice.actions;
 export default carsSlice.reducer;
