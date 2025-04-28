@@ -1,14 +1,15 @@
 import { CarCardProps } from "../../types/common";
-import { JSX } from "react";
+import { JSX, memo } from "react";
 
 const CarCard = (props: CarCardProps): JSX.Element => {
   const { imgUrl, title, city, rating, porpularity } = props;
   return (
     <div className="max-w-sm bg-white border border-gray-200 w-full rounded-lg shadow-sm dark:bg-gray-800 dark:border-gray-700 hover:shadow-lg transition-transform transform hover:scale-105">
       <div
-        className=" rounded-t-lg transition-[background-size] duration-300 ease-in-out bg-no-repeat bg-[length:100%] h-[155px] w-full bg-center overflow-hidden transform transition-transform duration-300"
+        className="rounded-t-lg bg-no-repeat bg-[length:100%] h-[155px] w-full bg-center overflow-hidden"
         style={{
           backgroundImage: `url(${imgUrl})`,
+          transitionDuration: "0.7s",
         }}
         onMouseEnter={(e) => (e.currentTarget.style.backgroundSize = "110%")}
         onMouseLeave={(e) => (e.currentTarget.style.backgroundSize = "100%")}
@@ -41,4 +42,4 @@ const CarCard = (props: CarCardProps): JSX.Element => {
   );
 };
 
-export default CarCard;
+export default memo(CarCard);

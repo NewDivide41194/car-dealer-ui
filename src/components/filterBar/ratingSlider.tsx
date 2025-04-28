@@ -1,4 +1,4 @@
-import React, { JSX } from "react";
+import React, { JSX, memo, useCallback } from "react";
 import { RootState } from "../../store";
 import { useAppDispatch, useAppSelector } from "../../hooks/useAppDispatch";
 import { setRating } from "../../features/filterSlice";
@@ -8,23 +8,27 @@ const RatingSlider = (): JSX.Element => {
   const { selectedRating } = useAppSelector((state: RootState) => state.filter);
   const { filters } = useAppSelector((state: RootState) => state.cars);
   const dispatch = useAppDispatch();
-  const onChangeRating = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const value = parseFloat(e.target.value);
-    dispatch(setRating(value));
-    dispatch(setFilter({ ...filters, rating_score: value.toString() }));
-    dispatch(
-      fetchCars({
-        page: 1,
-        filters: { ...filters, rating_score: value.toString() },
-      }),
-    );
-  };
+
+  const onChangeRating = useCallback(
+    (e: React.ChangeEvent<HTMLInputElement>) => {
+      const value = parseFloat(e.target.value);
+      dispatch(setRating(value));
+      dispatch(setFilter({ ...filters, rating_score: value.toString() }));
+      dispatch(
+        fetchCars({
+          page: 1,
+          filters: { ...filters, rating_score: value.toString() },
+        }),
+      );
+    },
+    [dispatch, filters],
+  );
 
   return (
     <div className="flex flex-row items-center">
       <label
         htmlFor="rating-score"
-        className="block text-sm text-gray-900 dark:text-white whitespace-nowrap mx-4 font-bold"
+        className="block text-medium text-gray-900 dark:text-white whitespace-nowrap mx-4"
       >
         Rating :
       </label>
@@ -45,4 +49,4 @@ const RatingSlider = (): JSX.Element => {
   );
 };
 
-export default RatingSlider;
+export default memo(RatingSlider);

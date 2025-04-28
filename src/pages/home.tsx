@@ -1,12 +1,11 @@
 import { JSX } from "react";
-import FilterBar from "../components/filterBar";
-import CarDealerList from "../components/listComponent/carDealerList";
+import { DefaultCarDealerList, FilterBar } from "../components";
 
 const HomePage = (): JSX.Element => {
   return (
     <>
       <FilterBar />
-      <CarDealerList />
+      <DefaultCarDealerList />
     </>
   );
 };

@@ -1,4 +1,4 @@
-import { useMemo } from "react";
+import { memo, useCallback, useMemo } from "react";
 import { useAppDispatch, useAppSelector } from "../../hooks/useAppDispatch";
 import {
   fetchCars,
@@ -14,15 +14,17 @@ const SearchInput = () => {
   const dispatch = useAppDispatch();
   // console.log(selectedCategory);
 
-  const handleSearch = async (
-    searchTerm: string,
-    category: SearchCategories,
-  ) => {
-    const categoryParam =
-      category === "Rating" ? "rating_score" : category.toLowerCase();
-    dispatch(setFilter({ [categoryParam]: searchTerm }));
-    dispatch(fetchCars({ page: 1, filters: { [categoryParam]: searchTerm } }));
-  };
+  const handleSearch = useCallback(
+    (searchTerm: string, category: SearchCategories) => {
+      const categoryParam =
+        category === "Rating" ? "rating_score" : category.toLowerCase();
+      dispatch(setFilter({ [categoryParam]: searchTerm }));
+      dispatch(
+        fetchCars({ page: 1, filters: { [categoryParam]: searchTerm } }),
+      );
+    },
+    [dispatch],
+  );
 
   const debouncedSearch = useMemo(
     () =>
@@ -105,4 +107,4 @@ const SearchInput = () => {
     </form>
   );
 };
-export default SearchInput;
+export default memo(SearchInput);

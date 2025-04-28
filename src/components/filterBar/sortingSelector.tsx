@@ -1,4 +1,4 @@
-import { JSX } from "react";
+import { JSX, memo, useCallback } from "react";
 import { SortingOptions, SortingOrder } from "../../types/common";
 import { useAppDispatch, useAppSelector } from "../../hooks/useAppDispatch";
 import { RootState } from "../../store";
@@ -8,6 +8,7 @@ import {
   toggleDropdownSort,
 } from "../../features/sortingSlice";
 import { fetchCars, setFilter } from "../../features/carsSlice";
+import DropDownButton from "../elements/dropdownButton";
 
 const SortingSelector = (): JSX.Element => {
   const dispatch = useAppDispatch();
@@ -16,11 +17,15 @@ const SortingSelector = (): JSX.Element => {
   );
   const { filters } = useAppSelector((state: RootState) => state.cars);
 
-  const handleSelectSortBy = (item: SortingOptions) => {
-    dispatch(setSortBy(item));
-    dispatch(toggleDropdownSort());
-    // dispatch(setFilter({ ...filters, sort: item }));
-  };
+  const handleSelectSortBy = useCallback(
+    (item: SortingOptions) => {
+      dispatch(setSortBy(item));
+      dispatch(toggleDropdownSort());
+      // dispatch(setFilter({ ...filters, sort: item }));
+    },
+    [dispatch],
+  );
+
   const handleChangeSortOrder = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value.toLocaleLowerCase();
     if (selectedSortOrder) {
@@ -51,32 +56,18 @@ const SortingSelector = (): JSX.Element => {
     }
   };
 
+  const handleDropDownSort = useCallback((): void => {
+    dispatch(toggleDropdownSort());
+  }, [dispatch]);
+
   return (
     <div className="flex flex-row items-center">
       <div className="relative inline-block text-left me-2">
-        <button
-          onClick={() => dispatch(toggleDropdownSort())}
-          className="w-[150px] justify-between text-white bg-blue-600 hover:bg-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:bg-gray-700 dark:hover:bg-gray-600"
-          type="button"
-        >
-          {selectedSortOrder || "Sort by"}
-          <svg
-            className="w-2.5 h-2.5 ms-3"
-            aria-hidden="true"
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 10 6"
-          >
-            <path
-              stroke="currentColor"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth="2"
-              d="m1 1 4 4 4-4"
-            />
-          </svg>
-        </button>
-
+        <DropDownButton
+          onClickButton={handleDropDownSort}
+          text={selectedSortOrder}
+          placeholder={"Sort by"}
+        />
         {isDropdownOpen && (
           <div className="absolute z-10 mt-2 bg-white divide-y divide-gray-100 rounded-lg shadow-sm w-44 dark:bg-gray-700">
             <ul className="py-2 text-sm text-gray-700 dark:text-gray-200 shadow-lg">
@@ -122,4 +113,4 @@ const SortingSelector = (): JSX.Element => {
   );
 };
 
-export default SortingSelector;
+export default memo(SortingSelector);

@@ -3,6 +3,6 @@
 @tailwind utilities;
 
 html, body {
-  @apply bg-white dark:bg-gray-900 text-black dark:text-white transition-colors;
+  @apply bg-gray-100 dark:bg-gray-900 text-black dark:text-white transition-colors;
   min-height: 100vh;
 }
