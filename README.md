@@ -1,46 +1,74 @@
-# Getting Started with Create React App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# 🚗 Car Dealers Assignment
 
-## Available Scripts
+[![React](https://img.shields.io/badge/React-18.2.0-blue.svg)](https://reactjs.org/)
+[![TypeScript](https://img.shields.io/badge/TypeScript-4.9.5-blue.svg)](https://www.typescriptlang.org/)
+[![Redux Toolkit](https://img.shields.io/badge/Redux_Toolkit-2.7.0-purple.svg)](https://redux-toolkit.js.org/)
+[![TailwindCSS](https://img.shields.io/badge/TailwindCSS-3.4.1-38B2AC.svg)](https://tailwindcss.com/)
+[![MockAPI](https://img.shields.io/badge/MockAPI-Used-orange.svg)](https://mockapi.io/)
 
-In the project directory, you can run:
+---
 
-### `npm start`
+A simple React + TypeScript application for managing car dealers, with modern UI, API integration, and smooth functionality.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+🚀 **Live Demo:** [https://car-dealer-ui-xsqf.vercel.app/](https://car-dealer-ui-xsqf.vercel.app/)
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+---
 
-### `npm test`
+## 📦 Installation Guide
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+1. **Clone the Repository**
 
-### `npm run build`
+```bash
+git clone https://github.com/your-username/car-dealers-assignment.git
+cd car-dealers-assignment
+```
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+2. **Install Dependencies**
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+```bash
+npm install
+npm install --legacy-peer-deps
+```
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+3. **Running the Project**
 
-### `npm run eject`
+```bash
+npm start
+```
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+---
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## 🧪 Run End-to-End (E2E) Tests
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+```bash
+npm run test
+```
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+---
 
-## Learn More
+## 🛠️ Technology Stack
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+| Technology              | Description                          |
+| ------------------------ | ------------------------------------ |
+| **React**                | Front-end JavaScript library         |
+| **TypeScript**           | Typed superset of JavaScript         |
+| **Redux Toolkit**        | Modern Redux state management       |
+| **React Query**          | Fetching, caching, and updating data |
+| **Tailwind CSS**         | Utility-first CSS framework          |
+| **Flowbite**             | Pre-built UI components with Tailwind |
+| **Framer Motion**        | Declarative animations in React      |
+| **React Router v7**      | Routing and navigation               |
+| **MockAPI**              | Mock REST API service                |
+| **ESLint**               | JavaScript linter                    |
+| **Prettier**             | Code formatter                       |
+| **Cypress**              | End-to-End Testing                   |
+| **React Testing Library**| Testing UI components                |
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+---
+
+## 🔗 Live Demo
+
+👉 [Click here to view the app!](https://car-dealer-ui-xsqf.vercel.app/)
+
+---
