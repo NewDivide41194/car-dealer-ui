@@ -1,18 +1,19 @@
 import { CarCardProps } from "../../types/common";
 import { JSX, memo } from "react";
+import CarNotFound from "../../assets/images/car-not-found.png";
 
 const CarCard = (props: CarCardProps): JSX.Element => {
   const { imgUrl, title, city, rating, porpularity } = props;
   return (
-    <div className="max-w-sm bg-white border border-gray-200 w-full rounded-lg shadow-sm dark:bg-gray-800 dark:border-gray-700 hover:shadow-lg transition-transform transform hover:scale-105">
-      <div
-        className="rounded-t-lg bg-no-repeat bg-[length:100%] h-[155px] w-full bg-center overflow-hidden"
-        style={{
-          backgroundImage: `url(${imgUrl})`,
-          transitionDuration: "0.7s",
+    <div className="overflow-hidden max-w-sm bg-white border border-gray-200 w-full rounded-lg shadow-sm dark:bg-gray-800 dark:border-gray-700 hover:shadow-lg transition-transform transform hover:scale-105">
+      <img
+        className="h-48 w-full object-cover transition-transform hover:scale-105 transition-duration-700"
+        src={imgUrl}
+        onError={(e) => {
+          (e.target as HTMLImageElement).src = CarNotFound;
+          (e.target as HTMLImageElement).alt = "Image failed to load";
         }}
-        onMouseEnter={(e) => (e.currentTarget.style.backgroundSize = "110%")}
-        onMouseLeave={(e) => (e.currentTarget.style.backgroundSize = "100%")}
+        alt={title}
       />
 
       <div className="p-5">
